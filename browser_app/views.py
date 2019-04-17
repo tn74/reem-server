@@ -55,15 +55,16 @@ class ContentView(View):
         return html_full.format(formatted_data)
 
     def process_terminal_value(self, request, value, path, depth):
-        if "." in path:
-            path = path.split(".")[-1]
-        padded_key_string = "{}".format(path)
+        key = path
+        if "." in key:
+            key = key.split(".")[-1]
+        padded_key_string = "{}".format(key)
         padded_key_string += "".join(["&nbsp;" for i in range(20 - len(padded_key_string))])
         indents = "".join("&nbsp;" for i in range(depth * 2))
         if type(value).__module__ == np.__name__:
-            np_key_link = "{}{}".format(request.META['HTTP_HOST'], reverse('browser_app:npview', kwargs={'path': path}))
+            np_key_link = "http://{}{}".format(request.META['HTTP_HOST'], reverse('browser_app:npview', kwargs={'path': path}))
             print(np_key_link)
-            value = "<a data-toggle=\"collapse\" href=\"{}\">np_array_list_view</a>" \
+            value = "<a href=\"{}\">np_array_list_view</a>" \
                 .format(np_key_link)
         formatted_data = "<p>{}{}{}</p>".format(indents, padded_key_string, value)
         return formatted_data

@@ -31,22 +31,13 @@ def get_content(path):
 class ContentView(View):
     def get(self, request, path):
         content = get_content(path)
-        html = self.html_content(content, path)
+        html = self.html_content(request, content, path)
         return render(request, "view.html", {"display_html": html, "search":path})
 
-    def html_content(self, content, path, depth=0):
-        indents = "".join("&nbsp;" for i in range(depth * 2))
-
+    def html_content(self, request, content, path, depth=0):
         html_full = "<div class=\"container\">\n {} \n</div>"
         if type(content) is not dict:
-            # if type(content).__module__ == np.__name__:
-            #     np_key_link = reverse('browser_app:npview', kwargs={'path': path})
-            #     formatted_data = "<a data-toggle=\"collapse\" href=\"#{}\"><p> np_array_list_view </p></a>" \
-            #         .format(np_key_link)
-            # else:
-            #     formatted_data = "{}{}".format(indents, content.__repr__())
-            formatted_data = self.process_terminal_value("", content, path, depth)
-
+            formatted_data = self.process_terminal_value(request, content, path, depth)
             return html_full.format(formatted_data)
 
         formatted_data = ""
@@ -56,25 +47,25 @@ class ContentView(View):
                 key_string = "<a data-toggle=\"collapse\" href=\"#{}\"><p> {}</p></a>"\
                     .format(drop_down_id, k)
                 internal_div = "{}\n<div class=\"collapse\" id={}>\n {} \n</div>"\
-                    .format(key_string, drop_down_id, self.html_content(v, path + "." + k, depth+1))
+                    .format(key_string, drop_down_id, self.html_content(request, v, path + "." + k, depth+1))
                 formatted_data += internal_div
             else:
-                # padded_key_string = "{}".format(k)
-                # padded_key_string += "".join(["&nbsp;" for i in range(20 - len(padded_key_string))])
-                # formatted_data += "{}{}</p>\n".format(padded_key_string, v)
-                formatted_data += self.process_terminal_value(k, v, path, depth)
+                formatted_data += self.process_terminal_value(request, v, path + "." + k, depth)
 
         return html_full.format(formatted_data)
 
-    def process_terminal_value(self, key, value, path, depth):
-        indents = "".join("&nbsp;" for i in range(depth * 2))
-        padded_key_string = "{}".format(key)
+    def process_terminal_value(self, request, value, path, depth):
+        if "." in path:
+            path = path.split(".")[-1]
+        padded_key_string = "{}".format(path)
         padded_key_string += "".join(["&nbsp;" for i in range(20 - len(padded_key_string))])
+        indents = "".join("&nbsp;" for i in range(depth * 2))
         if type(value).__module__ == np.__name__:
-            np_key_link = reverse('browser_app:npview', kwargs={'path': path})
-            value = "<a data-toggle=\"collapse\" href=\"#{}\"><p> np_array_list_view </p></a>" \
+            np_key_link = "{}{}".format(request.META['HTTP_HOST'], reverse('browser_app:npview', kwargs={'path': path}))
+            print(np_key_link)
+            value = "<a data-toggle=\"collapse\" href=\"{}\">np_array_list_view</a>" \
                 .format(np_key_link)
-        formatted_data = "{}<p>{}{}</p>\n".format(indents, padded_key_string, value)
+        formatted_data = "<p>{}{}{}</p>".format(indents, padded_key_string, value)
         return formatted_data
 
 

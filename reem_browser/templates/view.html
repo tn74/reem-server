@@ -3,7 +3,7 @@
         <div class="container">
             <h1> View Data </h1>
             <h3> Path: &nbsp;&nbsp;&nbsp; {{search}} </h3>
-            <hr>
+            {% load static %}
             {% autoescape off %}
                 {{ display_html }}
             {% endautoescape %}

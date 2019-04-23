@@ -5,6 +5,8 @@ from django.conf import settings
 from reem.connection import RedisInterface
 from reem.datatypes import KeyValueStore
 import numpy as np
+import scipy
+import time
 # Create your views here.
 
 interface = RedisInterface(settings.REEM_HOSTNAME)
@@ -88,6 +90,20 @@ class NumpyView(View):
                 ret_string += self.make_numpy_string(val, depth+1)
         ret_string += "<p>{}]</p>".format(indents)
         return ret_string
+
+
+class NumpyImageView(View):
+    def get(self, request, path):
+        arr = get_content(path)
+        if not type(arr).__module__ == np.__name__:
+            return render(request, "view.html", {"display_html": "No Numpy Array Here", "search": path})
+        else:
+            return render(request, "view.html", {"display_html": self.display_np_image(arr), "search": path})
+
+    def display_np_image(self, arr, depth=0):
+        fname = "{}.jpg".format(int(time.time()))
+        scipy.misc.toimage(arr, cmin=0.0, cmax=255).save("browswer_app/static/{}".format(fname))
+        return "<img src=\"{% static '{}' %}\" / >".format(fname)
 
 
 class Home(View):

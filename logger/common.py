@@ -32,9 +32,16 @@ def retrieve_data_at_time(log_folder, time):
         desired_timestamp = timestamps[timestamp_index]
         desired_record_name = os.path.join(key_dir, "{}".format(desired_timestamp).replace(".", "_") + ".npy")
         value = np.load(desired_record_name)
-        data[path_name] = value
+        # print("Retrieving Data at Times")
+        # print(value)
+        # print(value.dtype)
+        # print(value.shape)
         if value.dtype == np.object:
-            data[path_name] = value.item()
-        if np.isscalar(data[path_name]):
-            data[path_name] = float(data[path_name])
+            value = value.item()
+        elif len(value.shape) < 1:
+            value = float(value)
+        data[path_name] = value
+        # print(type(value))
+        # print(value)
+        # print()
     return data

@@ -6,6 +6,13 @@ import csv
 import time
 import os
 from threading import Thread
+import logging
+
+FORMAT = "%(threadName)10s %(asctime)20s %(filename)30s:%(lineno)3s  %(funcName)20s() %(levelname)10s     %(message)s"
+logging.basicConfig(format=FORMAT)
+
+logger = logging.getLogger("reem.datatypes")
+logger.setLevel(logging.DEBUG)
 
 func, keyfile, outfolder = "log", "test_key_files/key1.txt", "test_data_log/test1"
 kvs = KeyValueStore(RedisInterface())
@@ -19,22 +26,20 @@ def path_to_keys(path):
 
 def log_path(path, period, key_folder):
     key_sequence = path_to_keys(path)
-    print("Reading Key Sequence: {}".format(key_sequence))
     next_read = time.time() + period
     while True:
-        print("Reading: {}".format(path))
+        logger.debug("Path       : {}".format(path))
         current = time.time()
         if current >= next_read:
             # print("{} Current >= next_read".format(path))
             reader = kvs
             for k in key_sequence:
                 reader = reader[k]
-            print("Key: {}, Reader Path: {}".format(path, reader.path))
+            logger.debug("PathHandler: {} {}".format(reader.reader.top_key_name, reader.path))
             data = reader.read()
             np.save(os.path.join(key_folder, "{}".format(current).replace(".", "_")), data)  # . in time replaced with _
             next_read = current + period
         else:
-            print("{} Going to sleep".format(path))
             time.sleep(next_read - time.time())
 
 

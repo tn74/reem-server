@@ -20,6 +20,7 @@ class Writer:
         self.do_metadata_update = True
 
     def send_to_redis(self, path, value):
+        self.interface.INTERFACE_LOCK.acquire()
         logger.info("SET {} {} = {}".format(self.top_key_name, path, type(value)))
         # logger.debug("SET {} {} = {}".format(self.top_key_name, path, value))
         self.process_metadata(path, value)
@@ -30,6 +31,7 @@ class Writer:
         logger.debug("SET {} {} Serializables Pipelined".format(self.top_key_name, path))
         self.pipeline.execute()
         logger.debug("SET {} {} Pipeline Executed".format(self.top_key_name, path))
+        self.interface.INTERFACE_LOCK.release()
 
     def pull_metadata_from_server(self):
         try:
@@ -101,14 +103,22 @@ class Reader:
         self.pull_metadata = True
 
     def read_from_redis(self, path):
+        logger.debug("Asking for Lock")
+        self.interface.INTERFACE_LOCK.acquire()
+        logger.debug("Lock Acquired")
         logger.info("GET {} {}".format(self.top_key_name, path))
         self.update_metadata()
         logger.debug("GET {} {} Metadata: {}".format(self.top_key_name, path, self.metadata))
         if path in self.sp_to_label:
-            return self.pull_special_path(path)
+            ret_val = self.pull_special_path(path)
+            self.interface.INTERFACE_LOCK.release()
+            return ret_val
         self.queue_reads(path)
         logger.debug("GET {} {} Reads Queued".format(self.top_key_name, path))
-        return self.build_dictionary(path)
+        ret_val = self.build_dictionary(path)
+        logger.debug("Lock Releasing")
+        self.interface.INTERFACE_LOCK.release()
+        return ret_val
 
     def update_metadata(self):
         self.interface.metadata_listener.flush()

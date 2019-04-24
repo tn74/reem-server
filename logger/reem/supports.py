@@ -9,7 +9,6 @@ class MetadataListener:
         self.pubsub = self.client.pubsub()
         self.pubsub.psubscribe(['__keyspace@0__:*'])
         self.listeners = {}
-        self.METADATA_LISTENER_LOCK = Lock()
 
         super().__init__()
 
@@ -20,7 +19,6 @@ class MetadataListener:
         self.listeners[listen_name].append(reader)
 
     def flush(self):
-        self.METADATA_LISTENER_LOCK.acquire(True)  # Separate threads cannot access pubsub get_message at same time
         while True:
             item = self.pubsub.get_message()
             if item is None:
@@ -29,7 +27,6 @@ class MetadataListener:
             if channel in self.listeners:
                 for listener in self.listeners[channel]:
                     listener.pull_metadata = True
-        self.METADATA_LISTENER_LOCK.release()
 
 
 class PathHandler:

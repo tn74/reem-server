@@ -1,1 +1,4 @@
-foo, 1.0
+image_dict, 1.0
+image_dict.image, 2.0
+flat_data, 2.0
+flat_data.number, 2.0

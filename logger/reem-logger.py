@@ -17,21 +17,24 @@ def path_to_keys(path):
     return [path]
 
 
-def log_key(key, period, key_folder):
-    key_sequence = path_to_keys(key)
+def log_path(path, period, key_folder):
+    key_sequence = path_to_keys(path)
+    print("Reading Key Sequence: {}".format(key_sequence))
     next_read = time.time() + period
     while True:
-        print("Entered loop")
+        print("Reading: {}".format(path))
         current = time.time()
         if current >= next_read:
+            # print("{} Current >= next_read".format(path))
             reader = kvs
             for k in key_sequence:
                 reader = reader[k]
+            print("Key: {}, Reader Path: {}".format(path, reader.path))
             data = reader.read()
-            np.save(os.path.join(key_folder, "{}".format(int(time.time()))), data)
-            print("saved")
+            np.save(os.path.join(key_folder, "{}".format(current).replace(".", "_")), data)  # . in time replaced with _
             next_read = current + period
         else:
+            print("{} Going to sleep".format(path))
             time.sleep(next_read - time.time())
 
 
@@ -43,7 +46,7 @@ def log(key_fpath, out_path):
             key_folder = os.path.join(out_path, key)
             if not os.path.exists(key_folder):
                 os.makedirs(key_folder)
-            threads.append(Thread(target=log_key, args=(key, float(period), key_folder)))
+            threads.append(Thread(target=log_path, args=(key, float(period), key_folder)))
             threads[-1].setDaemon(True)
             threads[-1].start()
         threads[0].join()

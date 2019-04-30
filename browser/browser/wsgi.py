@@ -1,5 +1,5 @@
 """
-WSGI config for browser project.
+WSGI config for browser browser.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

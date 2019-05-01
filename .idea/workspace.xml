@@ -11,15 +11,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/browser/browser_app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="114" selection-start-line="114" selection-end-line="114" />
+            <state relative-caret-position="357">
+              <caret line="101" column="27" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
+                <element signature="e#455#765#0" />
                 <element signature="e#797#2771#0" />
                 <element signature="e#2801#3596#0" />
+                <element signature="e#3916#4545#0" />
               </folding>
             </state>
           </provider>
@@ -29,10 +31,33 @@
         <entry file="file://$PROJECT_DIR$/browser/scripts/upload_image.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reem-logger.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logger_rdb/reem-logger.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#124#432#0" />
+                <element signature="e#466#945#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -86,13 +111,13 @@
         <option value="$PROJECT_DIR$/logger/browser/app/urls.py" />
         <option value="$PROJECT_DIR$/logger/test_key_files/key1.txt" />
         <option value="$PROJECT_DIR$/logger/browser/app/views.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/redis.conf" />
         <option value="$PROJECT_DIR$/logger/reem-logger.py" />
         <option value="$PROJECT_DIR$/logger/common.py" />
         <option value="$PROJECT_DIR$/browser/browser_app/urls.py" />
         <option value="$PROJECT_DIR$/browser/scripts/upload_image.py" />
         <option value="$PROJECT_DIR$/browser/browser_app/views.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -118,12 +143,6 @@
               <item name="reem-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="reem-server" type="462c0819:PsiDirectoryNode" />
               <item name="browser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="reem-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="reem-server" type="462c0819:PsiDirectoryNode" />
-              <item name="browser" type="462c0819:PsiDirectoryNode" />
-              <item name="browser_app" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -272,7 +291,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -320,8 +339,10 @@
           <caret line="52" column="71" selection-start-line="52" selection-start-column="71" selection-end-line="52" selection-end-column="71" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#455#765#0" />
             <element signature="e#797#2771#0" />
             <element signature="e#2801#3596#0" />
+            <element signature="e#3916#4545#0" />
           </folding>
         </state>
       </provider>
@@ -377,8 +398,10 @@
           <caret line="52" column="71" selection-start-line="52" selection-start-column="71" selection-end-line="52" selection-end-column="71" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#455#765#0" />
             <element signature="e#797#2771#0" />
             <element signature="e#2801#3596#0" />
+            <element signature="e#3916#4545#0" />
           </folding>
         </state>
       </provider>
@@ -494,14 +517,14 @@
     <entry file="file://$PROJECT_DIR$/logger/reem/connection.py" />
     <entry file="file://$PROJECT_DIR$/logger/reem/supports.py" />
     <entry file="file://$PROJECT_DIR$/logger/reem/datatypes.py" />
-    <entry file="file://$PROJECT_DIR$/logger/browser/project/settings.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/browser/project/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="27" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/browser/project/wsgi.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/browser/project/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="13" column="56" selection-start-line="13" selection-start-column="56" selection-end-line="13" selection-end-column="56" />
@@ -522,14 +545,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/browser/app/urls.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/browser/app/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" column="98" selection-start-line="5" selection-start-column="98" selection-end-line="5" selection-end-column="98" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/browser/project/urls.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/browser/project/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
@@ -539,7 +562,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/browser/manage.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/browser/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
@@ -562,7 +585,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/browser/app/views.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/browser/app/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
@@ -572,7 +595,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/common.py">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="22" selection-start-line="22" selection-end-line="22" />
@@ -583,33 +606,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/test_key_files/key1.txt">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/test_key_files/key1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logger/ss">
+    <entry file="file://$PROJECT_DIR$/logger_rdb/ss">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logger/reem-logger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#157#406#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/redis.conf">
       <provider selected="true" editor-type-id="text-editor">
@@ -641,7 +646,7 @@
     <entry file="file://$PROJECT_DIR$/browser/scripts/upload_image.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
@@ -650,13 +655,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/browser/browser_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="357">
+          <caret line="101" column="27" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#455#765#0" />
             <element signature="e#797#2771#0" />
             <element signature="e#2801#3596#0" />
+            <element signature="e#3916#4545#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logger_rdb/reem-logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#124#432#0" />
+            <element signature="e#466#945#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
         </state>
       </provider>
     </entry>

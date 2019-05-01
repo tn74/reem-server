@@ -25,7 +25,6 @@ def get_content(path):
         for k in keys:
             pfinder = pfinder[k]
         val = pfinder.read()
-        print(val)
     except Exception:
         val = "Could not find entry matching {}".format(path)
     return val

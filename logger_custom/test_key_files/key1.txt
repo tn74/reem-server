@@ -1,0 +1,2 @@
+flat_data, 2.0
+flat_data.number, 2.0

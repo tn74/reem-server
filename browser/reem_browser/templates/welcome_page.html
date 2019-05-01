@@ -1,7 +1,38 @@
 {% extends "base.html" %}
 	{% block body %}
-<div class="container-fluid">
+<div class="container">
     <h1> Welcome to the REEM Browser</h1>
+
+    <p> This is a <a href="https://www.djangoproject.com/"> Django </a> based web browser
+        that allows you to view data stored with <a href="https://www.github.com/tn74/reem"> REEM </a> </p>
+
+
+     <ol>
+        <li> Go to the url path "/view/[reem-path]" to see the data stored in Redis </li>
+         <ul>
+             <li> For example, if you wanted to see what was stored at "foo.bar.subkey", go to the url
+             "http://127.0.0.1:8000/view/foo.bar.subkey"</li>
+         </ul>
+         <li> Numpy data can be viewed as </li>
+             <ol>
+                 <li> A pretty printed list of numbers </li>
+                 <li> An image </li>
+             </ol>
+            <ul>
+                <li> If you try to something the size of an image array as a list, the server probably won't load because
+                it takes too long generate the html</li>
+            </ul>
+
+    </ol>
+
+    <br/>
+
+    <p>By default the web server Django connects
+    to is the localhost. If you need to change that, change the REEM_hostname variable at the bottom
+    of Django's configuration variable.</p>
+    <ul>
+        <li> The Redis server where the data is stored must be on this machine and bounded to the local interface </li>
+    </ul>
 </div>
 
     {% endblock %}

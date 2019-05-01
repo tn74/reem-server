@@ -1,17 +1,18 @@
 from django.shortcuts import render, reverse
 from django.views import View
-from django.http import HttpResponse
 from django.conf import settings
 from reem.connection import RedisInterface
 from reem.datatypes import KeyValueStore
 import numpy as np
-import scipy
-import time
+from PIL import Image
+import io
+import base64
+
+
 # Create your views here.
 
 interface = RedisInterface(settings.REEM_HOSTNAME)
 interface.initialize()
-print("Initialized")
 kvs = KeyValueStore(interface)
 
 
@@ -64,10 +65,16 @@ class ContentView(View):
         padded_key_string += "".join(["&nbsp;" for i in range(20 - len(padded_key_string))])
         indents = "".join("&nbsp;" for i in range(depth * 2))
         if type(value).__module__ == np.__name__:
-            np_key_link = "http://{}{}".format(request.META['HTTP_HOST'], reverse('browser_app:npview', kwargs={'path': path}))
-            print(np_key_link)
-            value = "<a href=\"{}\">np_array_list_view</a>" \
-                .format(np_key_link)
+            np_key_link = "http://{}{}".format(
+                request.META['HTTP_HOST'],
+                reverse('browser_app:npview', kwargs={'path': path})
+            )
+            np_image_link = "http://{}{}".format(
+                request.META['HTTP_HOST'],
+                reverse('browser_app:npimageview', kwargs={'path': path})
+            )
+            value = "<a href=\"{}\">np_array_list_view</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=\"{}\">np_image_view</a>" \
+                .format(np_key_link, np_image_link)
         formatted_data = "<p>{}{}{}</p>".format(indents, padded_key_string, value)
         return formatted_data
 
@@ -101,9 +108,13 @@ class NumpyImageView(View):
             return render(request, "view.html", {"display_html": self.display_np_image(arr), "search": path})
 
     def display_np_image(self, arr, depth=0):
-        fname = "{}.jpg".format(int(time.time()))
-        scipy.misc.toimage(arr, cmin=0.0, cmax=255).save("browswer_app/static/{}".format(fname))
-        return "<img src=\"{% static '{}' %}\" / >".format(fname)
+        img = Image.fromarray(arr.astype('uint8'))
+        b = io.BytesIO()
+        img.save(b, 'png')
+        b64decode = base64.b64encode(b.getvalue()).decode()
+        return "<img src=\"data:image/png;base64,{}\" alt=\"Numpy array as image\" scale=\"0\">".format(
+            b64decode
+        )
 
 
 class Home(View):
